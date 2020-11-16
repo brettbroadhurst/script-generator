@@ -6,5 +6,6 @@
 import DocumentList from "./DocumentList";
 import Document from "./Document";
 import Header from "./Header";
+import Layout from "./Layout";
 
-export { DocumentList, Document, Header };
+export { DocumentList, Document, Header, Layout };

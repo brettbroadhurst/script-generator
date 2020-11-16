@@ -3,6 +3,7 @@
 // Written by Brett Broadhurst <brettbroadhurst@gmail.com>
 //
 
+import CreationView from "./CreationView";
 import DocumentsView from "./DocumentsView";
 
-export { DocumentsView };
+export { CreationView, DocumentsView };
