@@ -3,3 +3,17 @@
   width: 100%;
   border-bottom: 2px solid #16161d;
 }
+
+.create {
+  height: 36px;
+  width: 128px;
+  background: dodgerblue;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.create:hover {
+  cursor: pointer;
+}
