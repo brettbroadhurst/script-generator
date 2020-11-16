@@ -1,0 +1,13 @@
+/* DocumentList/styles.module.css - Styles for Document List
+ *
+ * Written by Brett Broadhurst <brettbroadhurst@gmail.com>
+ */
+
+.documents {
+  display: grid;
+  grid-template-columns: repeat(5, 144px);
+  grid-gap: 24px;
+  padding: 1em;
+  max-width: 820px;
+  margin: auto;
+}
