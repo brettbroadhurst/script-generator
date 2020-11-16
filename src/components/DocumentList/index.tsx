@@ -3,17 +3,17 @@
 // Written by Brett Broadhurst <brettbroadhurst@gmail.com>
 //
 
-import * as React from 'react';
-import { IDocument } from '../../types';
-import Document from '../../components/Document';
-import styles from './styles.module.css';
+import * as React from "react";
+import { IDocument } from "../../types";
+import Document from "../../components/Document";
+import styles from "./styles.module.css";
 
-type Props = {
-    documents: IDocument;
+type IProps = {
+  documents: IDocument[];
 };
 
 // Document list container
-const DocumentList: React.FC<Props> = (props: Props) => {
+const DocumentList: React.FC<IProps> = (props: IProps) => {
   const { documents } = props;
 
   return (
