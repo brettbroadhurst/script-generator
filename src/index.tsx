@@ -6,7 +6,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { IDocument } from "./types";
+import { IDocument, IMedium, IFormat, IGenre } from "./types";
 import { CreationView, DocumentsView } from "./containers";
 import "./index.css";
 
@@ -14,48 +14,9 @@ const docs: IDocument[] = [
   {
     id: uuidv4(),
     title: "Document 1",
-    createdOn: "",
-    updatedOn: "",
-  },
-  {
-    id: uuidv4(),
-    title: "Document 2",
-    createdOn: "",
-    updatedOn: "",
-  },
-  {
-    id: uuidv4(),
-    title: "Document 3",
-    createdOn: "",
-    updatedOn: "",
-  },
-  {
-    id: uuidv4(),
-    title: "Document 4",
-    createdOn: "",
-    updatedOn: "",
-  },
-  {
-    id: uuidv4(),
-    title: "Document 5",
-    createdOn: "",
-    updatedOn: "",
-  },
-  {
-    id: uuidv4(),
-    title: "Document 6",
-    createdOn: "",
-    updatedOn: "",
-  },
-  {
-    id: uuidv4(),
-    title: "Document 7",
-    createdOn: "",
-    updatedOn: "",
-  },
-  {
-    id: uuidv4(),
-    title: "Document 8",
+    medium: IMedium.Film,
+    format: IFormat.LongMovie,
+    genre: IGenre.Horror,
     createdOn: "",
     updatedOn: "",
   },
@@ -64,14 +25,15 @@ const docs: IDocument[] = [
 const App: React.FC = () => {
   const [documents, setDocuments] = React.useState<IDocument[]>(docs);
 
-  function handleAddDocument(e: any) {
-    e.preventDefault();
-
+  function handleAddDocument(medium: IMedium, format: IFormat, genre: IGenre) {
     setDocuments((prev: IDocument[]) => [
       ...prev,
       {
         id: uuidv4(),
         title: "New Document",
+        medium,
+        format,
+        genre,
         createdOn: new Date().toDateString(),
         updatedOn: new Date().toDateString(),
       },
@@ -84,21 +46,12 @@ const App: React.FC = () => {
         <Route
           exact
           path="/"
-          render={() => (
-            <DocumentsView
-              documents={documents}
-              handleAddDocument={handleAddDocument}
-            />
-          )}
+          render={() => <DocumentsView documents={documents} />}
         />
         <Route
           exact
           path="/new"
-          render={() => (
-            <>
-              <CreationView />
-            </>
-          )}
+          render={() => <CreationView handleAddDocument={handleAddDocument} />}
         />
       </Switch>
     </BrowserRouter>

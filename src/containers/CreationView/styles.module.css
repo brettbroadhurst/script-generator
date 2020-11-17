@@ -6,28 +6,9 @@
 	gap: 24px;
 	height: 100%;
 }
-
-.card {
-	display: block;
-	height: 380px;
-	width: 320px;
-	border: 1px solid #16161d;
-	border-radius: 4px;
-	text-align: center;
-}
-
-.body {
+.select h2 {
+	font-size: 2.4rem;
+	font-weight: 600;
 	padding: 1em;
-}
-
-.body img {
-	display: block;
-	height: 256px;
-	width: 100%;
-	border: 1px solid #16161d;
-}
-
-.foot {
-	font-size: 1.6rem;	
-	font-weight: 500;
+	text-align: center;
 }
