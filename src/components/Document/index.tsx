@@ -4,18 +4,21 @@
 //
 
 import * as React from "react";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import { IDocument } from "../../types";
 
 type IProps = IDocument;
 
 const Document: React.FC<IProps> = (props: IProps) => {
-  const { title } = props;
+  const { id, title } = props;
 
   return (
-    <div className={styles.doc}>
-      <p>{title}</p>
-    </div>
+    <Link to={`/documents/${id}`}>
+      <div className={styles.doc}>
+        <p>{title}</p>
+      </div>
+    </Link>
   );
 };
 

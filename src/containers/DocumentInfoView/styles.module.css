@@ -1,0 +1,21 @@
+/*
+ *
+ *
+ */
+
+.container {
+	padding: 1em;
+}
+
+.container h1 {
+	font-size: 3rem;
+	margin: 1em 0px;
+}
+
+.container strong {
+	font-weight: 600;
+}
+
+.container p {
+	font-size: 1.4rem;
+}

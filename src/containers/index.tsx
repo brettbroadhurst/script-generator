@@ -5,5 +5,6 @@
 
 import CreationView from "./CreationView";
 import DocumentsView from "./DocumentsView";
+import DocumentInfoView from "./DocumentInfoView";
 
-export { CreationView, DocumentsView };
+export { CreationView, DocumentsView, DocumentInfoView };

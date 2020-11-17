@@ -7,7 +7,8 @@ import * as ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { IDocument, IMedium, IFormat, IGenre } from "./types";
-import { CreationView, DocumentsView } from "./containers";
+import { CreationView, DocumentsView, DocumentInfoView } from "./containers";
+
 import "./index.css";
 
 const docs: IDocument[] = [
@@ -52,6 +53,12 @@ const App: React.FC = () => {
           exact
           path="/new"
           render={() => <CreationView handleAddDocument={handleAddDocument} />}
+        />
+        <Route
+          path="/documents/:docId"
+          render={(props: any) => (
+            <DocumentInfoView {...props} documents={documents} />
+          )}
         />
       </Switch>
     </BrowserRouter>
