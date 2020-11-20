@@ -1,9 +1,25 @@
 version: "3.8"
 services:
     postgres:
-        build: .
+        build: ./data
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
-            POSTGRES_DB: script_generator 
+            POSTGRES_DB: scripts 
+        restart: always 
+
+    api:
+        build: .
+        depends_on:
+            - postgres
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASS: postgres
+            POSTGRES_DB: scripts 
+            POSTGRES_HOST: postgres 
+            POSTGRES_PORT: 5432 
+        ports:
+            - "8080:8080"
+        links:
+            - "postgres:postgres"
         restart: always 

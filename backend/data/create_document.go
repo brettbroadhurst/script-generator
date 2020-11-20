@@ -8,29 +8,6 @@ import (
 	sql "database/sql"
 )
 
-type Document struct {
-	// Big Serial ID
-	Id int64
-
-	// Title of the document
-	Title string
-
-	// Medium of the document; film/television
-	Medium int16
-
-	// Format of the document; Sitcom/Movie
-	Format int16
-
-	// Genre of the document
-	Genre int16
-
-	// Timestamp for creation
-	CreatedOn string
-
-	// Timestamp for last update
-	UpdatedOn string
-}
-
 // Create a new entry in the sg.document table and return a
 // struct containing its data.
 func (db *Database) CreateDocument(title string, medium, format, genre int16) (*Document, error) {
