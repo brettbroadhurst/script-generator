@@ -9,6 +9,8 @@ import (
 	sql "database/sql"
 )
 
+// Get all entries in the sg.document table and return them
+// in an array of structs
 func (db *Database) GetAllDocument() ([]Document, error) {
 	var (
 		docs  []Document
