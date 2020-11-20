@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+    postgres:
+        build: .
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: script_generator 
+        restart: always 
