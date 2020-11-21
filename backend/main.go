@@ -2,6 +2,7 @@ package main
 
 import (
 	data "github.com/brettbroadhurst/script-generator/backend/data"
+	cors "github.com/gin-contrib/cors"
 	gin "github.com/gin-gonic/gin"
 	log "log"
 	http "net/http"
@@ -94,6 +95,9 @@ func main() {
 
 	// Enable panic recovery to 500
 	r.Use(gin.Recovery())
+
+	// Enable CORS
+	r.Use(cors.Default())
 
 	// Create a new logger
 	l := log.New(os.Stdout, "API ", 0)

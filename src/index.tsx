@@ -5,28 +5,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { IDocument, IMedium, IFormat, IGenre } from "./types";
 import { CreationView, DocumentsView, DocumentInfoView } from "./containers";
-
 import "./index.css";
 
-const docs: IDocument[] = [
-  {
-    id: uuidv4(),
-    title: "Document 1",
-    medium: IMedium.Film,
-    format: IFormat.LongMovie,
-    genre: IGenre.Horror,
-    createdOn: "",
-    updatedOn: "",
-  },
-];
-
 const App: React.FC = () => {
-  const [documents, setDocuments] = React.useState<IDocument[]>(docs);
-
-  function handleAddDocument(medium: IMedium, format: IFormat, genre: IGenre) {
+  /*function handleAddDocument(medium: IMedium, format: IFormat, genre: IGenre) {
     setDocuments((prev: IDocument[]) => [
       ...prev,
       {
@@ -39,27 +22,14 @@ const App: React.FC = () => {
         updatedOn: new Date().toDateString(),
       },
     ]);
-  }
+  }*/
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => <DocumentsView documents={documents} />}
-        />
-        <Route
-          exact
-          path="/new"
-          render={() => <CreationView handleAddDocument={handleAddDocument} />}
-        />
-        <Route
-          path="/documents/:docId"
-          render={(props: any) => (
-            <DocumentInfoView {...props} documents={documents} />
-          )}
-        />
+        <Route exact path="/" component={DocumentsView} />
+        <Route exact path="/new" component={CreationView} />
+        <Route path="/documents/:docId" component={DocumentInfoView} />
       </Switch>
     </BrowserRouter>
   );

@@ -8,17 +8,31 @@ import { RouteComponentProps } from "react-router-dom";
 import styles from "./styles.module.css";
 import { Layout } from "../../components";
 import { IDocument, IMedium, IFormat, IGenre } from "../../types";
+import { API_ROOT } from "../../api";
 
 type TParam = {
   docId: string;
 };
 
-interface IProps extends RouteComponentProps<TParam> {
-  documents: IDocument[];
-}
+interface IProps extends RouteComponentProps<TParam> {}
 
 const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
-  const { documents, match } = props;
+  const { match } = props;
+  const { docId } = match.params;
+
+  // Documents to display
+  const [doc, setDoc] = React.useState<IDocument>();
+
+  React.useEffect(() => {
+    // Get the documents from the API
+    fetch(`${API_ROOT}/documents/${docId}`)
+      .then((res) => res.json())
+      .then(({ data }) => {
+        setDoc(data);
+        console.log(data);
+      })
+      .catch((err: any) => console.error(err));
+  }, []);
 
   function getMedium(medium: IMedium): string {
     switch (medium) {
@@ -63,7 +77,6 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
     }
   }
 
-  const doc = documents.find((d: IDocument) => d.id === match.params.docId);
   if (doc) {
     const { title, medium, format, genre } = doc;
     return (
@@ -86,9 +99,11 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
       </Layout>
     );
   } else {
-    <Layout>
-      <h1>Document not found</h1>
-    </Layout>;
+    return (
+      <Layout>
+        <h1>Could not find document</h1>
+      </Layout>
+    );
   }
 };
 

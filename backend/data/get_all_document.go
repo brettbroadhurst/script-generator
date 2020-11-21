@@ -21,7 +21,7 @@ func (db *Database) GetAllDocument() ([]Document, error) {
 
 	query = `
 	SELECT
-		doc_id
+		doc_id,
 		title,
 		medium,
 		format,

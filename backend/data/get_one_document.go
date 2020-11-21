@@ -21,7 +21,7 @@ func (db *Database) GetOneDocument(id int64) (*Document, error) {
 
 	query = `
 	SELECT
-		doc_id
+		doc_id,
 		title,
 		medium,
 		format,
@@ -36,6 +36,8 @@ func (db *Database) GetOneDocument(id int64) (*Document, error) {
 
 	// Execute the query
 	row = db.conn.QueryRow(query, id)
+
+	doc = &Document{}
 
 	// Scan the rows into the structure
 	err = row.Scan(
