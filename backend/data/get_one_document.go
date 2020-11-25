@@ -49,7 +49,10 @@ func (db *Database) GetOneDocument(id int64) (*Document, error) {
 		&doc.UpdatedOn,
 	)
 
-	if err != nil {
+	switch err {
+	case sql.ErrNoRows:
+		return nil, nil
+	default:
 		db.logger.Printf("GetOneDocument() failed: %s\n", err)
 		return nil, err
 	}
