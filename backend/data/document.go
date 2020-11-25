@@ -1,3 +1,7 @@
+// data/document.go - Document
+// Written by Brett Broadhurst <brettbroadhurst@gmail.com>
+//
+
 package data
 
 type Document struct {

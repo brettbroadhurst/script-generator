@@ -1,6 +1,5 @@
-//
 // data/get_all_documents.go - Get all documents
-// Written by Brett Broadhurst <brett@crevolute.com>
+// Written by Brett Broadhurst <brettbroadhurst@gmail.com>
 //
 
 package data
