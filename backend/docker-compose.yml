@@ -6,20 +6,22 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: scripts 
+        volumes:
+            - "./postgres_data:/var/lib/postgresql/data:rw"
         restart: always 
 
-    api:
-        build: .
-        depends_on:
-            - postgres
-        environment:
-            POSTGRES_USER: postgres
-            POSTGRES_PASS: postgres
-            POSTGRES_DB: scripts 
-            POSTGRES_HOST: postgres 
-            POSTGRES_PORT: 5432 
-        ports:
-            - "8080:8080"
-        links:
-            - "postgres:postgres"
-        restart: always 
+        #api:
+        #build: .
+        #depends_on:
+        #    - postgres
+        #environment:
+        #    POSTGRES_USER: postgres
+        #    POSTGRES_PASS: postgres
+        #    POSTGRES_DB: scripts 
+        #    POSTGRES_HOST: postgres 
+        #    POSTGRES_PORT: 5432 
+        #ports:
+        #    - "8080:8080"
+        #links:
+        #    - "postgres:postgres"
+        #restart: always 
