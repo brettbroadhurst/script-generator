@@ -21,7 +21,7 @@ CREATE TABLE sg.document (
 -- Scene represents a container for all scene data in a document/story.
 CREATE TABLE sg.scene (
 	scene_id   bigserial   not null,
-	next_id    bigserial   default null,
+	next_id    bigserial,
 	doc_id     bigserial   not null,
 	title      varchar(64) not null,
 	location   varchar(64) not null,
