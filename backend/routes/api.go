@@ -1,3 +1,6 @@
+// routes/api.go - API Service
+// Written by Brett Broadhurst <brettbroadhurst@gmail.com>
+
 package routes
 
 import (

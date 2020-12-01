@@ -10,6 +10,7 @@ import (
 // Create a new entry in the sg.scene table, get the entry and return it
 // as a serialized struct.
 func (db *Database) CreateScene(
+	docId int64,
 	title string,
 	location string,
 	time string,
@@ -27,6 +28,7 @@ func (db *Database) CreateScene(
 	// Insert query
 	query = `
 	INSERT INTO sg.scene (
+		doc_id,
 		title,
 		location,
 		time,
@@ -39,7 +41,8 @@ func (db *Database) CreateScene(
 		$3,
 		$4,
 		$5,
-		$6
+		$6,
+		$7
 	) RETURNING
 		scene_id,
 		next_id,
@@ -57,6 +60,7 @@ func (db *Database) CreateScene(
 	// Execute the query
 	row = db.conn.QueryRow(
 		query,
+		docId,
 		title,
 		location,
 		time,

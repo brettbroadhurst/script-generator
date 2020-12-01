@@ -1,3 +1,6 @@
+// routes/get_all_document.go - Get all documents route
+// Written by Brett Broadhurst <brettbroadhurst@gmail.com>
+
 package routes
 
 import (
@@ -14,5 +17,6 @@ func (service *APIService) GetAllDocument(ctx *gin.Context) {
 		return
 	}
 
+	// Return the data as JSON
 	ctx.JSON(http.StatusOK, gin.H{"data": docs})
 }

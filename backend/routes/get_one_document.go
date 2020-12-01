@@ -1,3 +1,6 @@
+// routes/get_one_document.go - Get one document route
+// Written by Brett Broadhurst <brettbroadhurst@gmail.com>
+
 package routes
 
 import (
@@ -25,5 +28,6 @@ func (service *APIService) GetOneDocument(ctx *gin.Context) {
 		return
 	}
 
+	// Return the data as JSON
 	ctx.JSON(http.StatusOK, gin.H{"data": doc})
 }

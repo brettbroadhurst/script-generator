@@ -1,3 +1,6 @@
+// routes/create_document.go - Create a new document route
+// Written by Brett Broadhurst <brettbroadhurst@gmail.com>
+
 package routes
 
 import (
@@ -46,5 +49,6 @@ func (service *APIService) CreateDocument(ctx *gin.Context) {
 		return
 	}
 
+	// Return the data as JSON
 	ctx.JSON(http.StatusCreated, gin.H{"data": doc})
 }
