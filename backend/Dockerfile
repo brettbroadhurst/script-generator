@@ -2,7 +2,7 @@
 FROM golang:1.15 as build
 
 # I own this >:D
-LABEL maintainer="Brett Broadhurst <brett@crevolute.com>"
+LABEL maintainer="Brett Broadhurst <brettbroadhurst@gmail.com>"
 
 # Enable Go Modules
 ENV GO111MODULE=on
