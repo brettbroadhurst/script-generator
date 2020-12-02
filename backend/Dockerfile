@@ -17,6 +17,7 @@ WORKDIR /go/src/github.com/brettbroadhurst/script-generator/backend
 # Copy files
 COPY go.mod go.sum main.go ./
 ADD data data
+ADD routes routes
 
 # Download all dependancies
 RUN go mod download

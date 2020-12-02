@@ -36,6 +36,20 @@ export interface IDocument {
   updatedOn: string;
 }
 
+export interface IScene {
+  id: number;
+  nextId: number;
+  docId: number;
+  title: string;
+  location: string;
+  time: string;
+  setup: string;
+  action: string;
+  conclusion: string;
+  createdOn: string;
+  updatedOn: string;
+}
+
 export interface IOptionCard {
   id: string;
   name: string;

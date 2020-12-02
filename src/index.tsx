@@ -9,21 +9,6 @@ import { CreationView, DocumentsView, DocumentInfoView } from "./containers";
 import "./index.css";
 
 const App: React.FC = () => {
-  /*function handleAddDocument(medium: IMedium, format: IFormat, genre: IGenre) {
-    setDocuments((prev: IDocument[]) => [
-      ...prev,
-      {
-        id: uuidv4(),
-        title: "New Document",
-        medium,
-        format,
-        genre,
-        createdOn: new Date().toDateString(),
-        updatedOn: new Date().toDateString(),
-      },
-    ]);
-  }*/
-
   return (
     <BrowserRouter>
       <Switch>

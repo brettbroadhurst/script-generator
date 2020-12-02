@@ -13,6 +13,6 @@ type Scene struct {
 	Setup      string `form:"setup" json:"setup" xml:"setup" binding:"required"`
 	Action     string `form:"action" json:"action" xml:"action" binding:"required"`
 	Conclusion string `form:"conclusion" json:"conclusion" xml:"conclusion" binding:"required"`
-	CreatedOn  string `json:"created_on" binding:"required"`
-	UpdatedOn  string `json:"updated_on" binding:"required"`
+	CreatedOn  string `json:"createdOn" binding:"required"`
+	UpdatedOn  string `json:"updatedOn" binding:"required"`
 }

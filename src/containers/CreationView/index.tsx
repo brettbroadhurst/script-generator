@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import styles from "./styles.module.css";
 import { Layout, OptionCard } from "../../components";
 import { IOption, IOptionCard, IMedium, IFormat, IGenre } from "../../types";
+import { API_ROOT } from "../../api";
 
 // Medium options
 const mediumOpts: IOptionCard[] = [
@@ -72,14 +73,8 @@ const genreOpts: IOptionCard[] = [
   },
 ];
 
-type IProps = {
-  handleAddDocument(medium: IMedium, format: IFormat, genre: IGenre): void;
-};
-
 // View for creating new script boilerplates
-const CreationView: React.FC<IProps> = (props: IProps) => {
-  const { handleAddDocument } = props;
-
+const CreationView: React.FC = () => {
   // Medium to be submitted and saved
   const [medium, setMedium] = React.useState<IMedium>(IMedium.None);
 
@@ -94,8 +89,22 @@ const CreationView: React.FC<IProps> = (props: IProps) => {
 
   // Handler function for submitting the entered data.
   function handleSubmit(): void {
-    console.log(medium, format, genre);
-    handleAddDocument(medium, format, genre);
+    fetch(`${API_ROOT}/documents`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "Test script",
+        medium,
+        format,
+        genre,
+      }),
+    })
+      .then((res) => res.json())
+      .then(({ data }) => console.log(data))
+      .catch((err) => console.error(err));
   }
 
   // Handler function for setting the medium when a card is selected.

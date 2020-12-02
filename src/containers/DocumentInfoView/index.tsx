@@ -7,7 +7,8 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styles from "./styles.module.css";
 import { Layout } from "../../components";
-import { IDocument, IMedium, IFormat, IGenre } from "../../types";
+import { IDocument, IScene, IMedium, IFormat, IGenre } from "../../types";
+import { getMedium, getFormat, getGenre } from "../../util";
 import { API_ROOT } from "../../api";
 
 type TParam = {
@@ -22,6 +23,7 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
 
   // Documents to display
   const [doc, setDoc] = React.useState<IDocument>();
+  const [scenes, setScenes] = React.useState<IScene[]>([]);
 
   React.useEffect(() => {
     // Get the documents from the API
@@ -32,50 +34,16 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
         console.log(data);
       })
       .catch((err: any) => console.error(err));
+
+    // Get the documents from the API
+    fetch(`${API_ROOT}/documents/${docId}/scenes`)
+      .then((res) => res.json())
+      .then(({ data }) => {
+        setScenes(data);
+        console.log(data);
+      })
+      .catch((err: any) => console.error(err));
   }, []);
-
-  function getMedium(medium: IMedium): string {
-    switch (medium) {
-      case IMedium.None:
-        return "Error";
-      case IMedium.Film:
-        return "Film";
-      case IMedium.Television:
-        return "Television";
-      default:
-        return "Error";
-    }
-  }
-
-  function getFormat(format: IFormat): string {
-    switch (format) {
-      case IFormat.ShortSitcom:
-        return "Short Sitcom";
-      case IFormat.LongSitcom:
-        return "Long Sitcom";
-      case IFormat.ShortMovie:
-        return "Short Movie";
-      case IFormat.LongMovie:
-        return "Long Movie";
-      default:
-        return "Error";
-    }
-  }
-
-  function getGenre(genre: IGenre): string {
-    switch (genre) {
-      case IGenre.Drama:
-        return "Drama";
-      case IGenre.Horror:
-        return "Horror";
-      case IGenre.Comedy:
-        return "Comedy";
-      case IGenre.Fantasy:
-        return "Fantasy";
-      default:
-        return "Error";
-    }
-  }
 
   if (doc) {
     const { title, medium, format, genre } = doc;

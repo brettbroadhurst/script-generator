@@ -16,16 +16,28 @@ const DocumentsView: React.FC = () => {
 
   React.useEffect(() => {
     // Get the documents from the API
-    fetch(`${API_ROOT}/documents`)
-      .then((res) => res.json())
-      .then(({ data }) => setDocuments(data))
-      .catch((err: any) => console.error(err));
+    function getDocs() {
+      fetch(`${API_ROOT}/documents`)
+        .then((res) => res.json())
+        .then(({ data }) => {
+          setDocuments(data);
+        })
+        .catch((err: any) => console.error(err));
+    }
+
+    getDocs();
+
+    let interval = setInterval(getDocs, 3000);
+
+    return function cleanup() {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
     <Layout>
       <Header />
-      <DocumentList documents={documents} />
+      {documents.length > 0 && <DocumentList documents={documents} />}
     </Layout>
   );
 };
