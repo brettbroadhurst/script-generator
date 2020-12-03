@@ -45,7 +45,6 @@ func (db *Database) CreateScene(
 		$7
 	) RETURNING
 		scene_id,
-		next_id,
 		doc_id,
 		title,
 		location,
@@ -74,7 +73,6 @@ func (db *Database) CreateScene(
 	// Serialize struct
 	err = row.Scan(
 		&scene.Id,
-		&scene.NextId,
 		&scene.DocumentId,
 		&scene.Title,
 		&scene.Location,

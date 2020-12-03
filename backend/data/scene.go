@@ -5,9 +5,9 @@ package data
 
 type Scene struct {
 	Id         int64  `form:"id" json:"id" xml:"id" binding:"required"`
-	NextId     int64  `form:"nextId" json:"nextId" xml:"nextId"`
 	DocumentId int64  `form:"docId" json:"docId" xml:"docId" binding:"required"`
 	Title      string `form:"title" json:"title" xml:"title" binding:"required"`
+	Setting    int16  `form:"setting" json:"setting" xml:"setting" binding:"required"`
 	Location   string `form:"location" json:"location" xml:"location" binding:"required"`
 	Time       string `form:"time" json:"time" xml:"time" binding:"required"`
 	Setup      string `form:"setup" json:"setup" xml:"setup" binding:"required"`

@@ -35,10 +35,17 @@ func main() {
 	api := routes.NewAPIService(db, l)
 
 	// API Routines
+	// Documents
 	r.GET("/documents", api.GetAllDocument)
 	r.POST("/documents", api.CreateDocument)
 	r.GET("/documents/:docId", api.GetOneDocument)
+
+	// Scenes
 	r.GET("/documents/:docId/scenes", api.GetAllScene)
 	r.POST("/documents/:docId/scenes", api.CreateScene)
+	r.PUT("/scenes/:sceneId", api.UpdateScene)
+	r.PUT("/scenes/:sceneId/position", api.UpdateScenePosition)
+	r.DELETE("/scenes/:sceneId", api.DeleteScene)
+
 	r.Run()
 }

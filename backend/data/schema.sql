@@ -21,9 +21,10 @@ CREATE TABLE sg.document (
 -- Scene represents a container for all scene data in a document/story.
 CREATE TABLE sg.scene (
 	scene_id   bigserial   not null,
-	next_id    bigserial,
-	doc_id     bigserial   not null,
+	doc_id     bigint      not null,
+	order_idx  bigint      not null AUTO_INCREMENT, 
 	title      varchar(64) not null,
+	setting    smallint    not null,
 	location   varchar(64) not null,
 	time       varchar(64) not null,
 	setup      varchar     not null,
@@ -33,15 +34,14 @@ CREATE TABLE sg.scene (
 	updated_on timestamp   not null default current_timestamp,
 
 	PRIMARY KEY (scene_id),
-	FOREIGN KEY (next_id) REFERENCES sg.scene,
 	FOREIGN KEY (doc_id) REFERENCES sg.document(doc_id)
 );
 
 -- Actor represents a character in a story.
 CREATE TABLE sg.actor (
-	actor_id bigserial not null,
-	doc_id bigserial not null,
-	name varchar(128) not null,
+	actor_id bigserial    not null,
+	doc_id   bigint       not null,
+	name     varchar(128) not null,
 
 	PRIMARY KEY (actor_id),
 	FOREIGN KEY (doc_id) REFERENCES sg.document(doc_id)
@@ -77,6 +77,7 @@ INSERT INTO sg.document(title, medium, format, genre) VALUES ('Test Document', 1
 INSERT INTO sg.scene(
 	doc_id,
 	title,
+	setting,
 	location,
 	time,
 	setup,
@@ -85,6 +86,7 @@ INSERT INTO sg.scene(
 ) VALUES (
 	1,
 	'Test Scene',
+	1,
 	'Location',
 	'Time',
 	'This is a setup',
@@ -95,6 +97,7 @@ INSERT INTO sg.scene(
 INSERT INTO sg.scene(
 	doc_id,
 	title,
+	setting,
 	location,
 	time,
 	setup,
@@ -103,6 +106,7 @@ INSERT INTO sg.scene(
 ) VALUES (
 	1,
 	'Test Scene 2',
+	1,
 	'Location 2',
 	'Time 2',
 	'This is a setup 2',

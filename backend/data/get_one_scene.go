@@ -21,7 +21,6 @@ func (db *Database) GetOneScene(id int64) (*Scene, error) {
 	query = `
 	SELECT
 		scene_id,
-		next_id,
 		doc_id,
 		title,
 		location,
@@ -45,7 +44,6 @@ func (db *Database) GetOneScene(id int64) (*Scene, error) {
 	// Serialize struct
 	err = row.Scan(
 		&scene.Id,
-		&scene.NextId,
 		&scene.DocumentId,
 		&scene.Title,
 		&scene.Location,

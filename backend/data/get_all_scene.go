@@ -21,7 +21,6 @@ func (db *Database) GetAllSceneFromDocument(docId int64) ([]Scene, error) {
 	query = `
 	SELECT
 		scene_id,
-		next_id,
 		doc_id,
 		title,
 		location,
@@ -50,7 +49,6 @@ func (db *Database) GetAllSceneFromDocument(docId int64) ([]Scene, error) {
 		// Serialize struct
 		err = rows.Scan(
 			&s.Id,
-			&s.NextId,
 			&s.DocumentId,
 			&s.Title,
 			&s.Location,
