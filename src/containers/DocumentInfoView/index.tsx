@@ -73,7 +73,11 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
             <strong>Genre: </strong>
             {getGenre(genre)}
           </p>
-          <SceneList scenes={scenes} handleSubmit={handleUpdateScene} />
+          <SceneList
+            scenes={scenes}
+            setScenes={setScenes}
+            handleSubmit={handleUpdateScene}
+          />
         </div>
       </Layout>
     );
