@@ -7,46 +7,80 @@ import * as React from "react";
 import { IScene } from "../../types";
 import styles from "./styles.module.css";
 
-type IProps = IScene;
-
-const enum Setting {
+const enum ISetting {
   None = 0,
   Interior = 1,
   Exterior = 2,
 }
 
-// Scene component
-const Scene: React.FC<IProps> = (props: IProps) => {
-  const { title, setup, action, conclusion, location, time } = props;
+interface IProps extends IScene {
+  handleSubmit(id: number, data: any): void;
+}
 
+interface IState {
   // Title for the scene
-  const [newTitle, setNewTitle] = React.useState<string>("");
+  title: string;
 
   // Setting for the scene
-  const [newSetting, setNewSetting] = React.useState<string>(Setting.None);
+  setting: ISetting;
 
   // Location for the scene
-  const [newLocation, setNewLocation] = React.useState<string>("");
+  location: string;
 
   // Time for the scene
-  const [newTime, setNewTime] = React.useState<string>("");
+  time: string;
 
   // Setup for the scene
-  const [newSetup, setNewSetup] = React.useState<string>("");
+  setup: string;
 
   // Action for the scene
-  const [newAction, setNewAction] = React.useState<string>("");
+  action: string;
 
   // Conclusion for the scene
-  const [newConclusion, setNewConclusion] = React.useState<string>("");
+  conclusion: string;
+}
+
+// Scene component
+const Scene: React.FC<IProps> = (props: IProps) => {
+  const {
+    id,
+    title,
+    setup,
+    action,
+    conclusion,
+    location,
+    time,
+    handleSubmit,
+  } = props;
+
+  const [state, setState] = React.useState<IState>({
+    title: "",
+    setting: ISetting.None,
+    location: "",
+    time: "",
+    setup: "",
+    action: "",
+    conclusion: "",
+  });
+
+  function handleChange(e: any): void {
+    const { name, value } = e.target;
+    setState((prev: IState): IState => ({ ...prev, [name]: value }));
+  }
+
+  function onSubmit(e: any): void {
+    e.preventDefault();
+    handleSubmit(id, state);
+  }
 
   return (
     <div className={styles.scene}>
       <div className={styles.header}>
         <input
           className={styles.title}
-          value={newTitle}
-          onChange={(e: any) => setNewTitle(e.target.value)}
+          name="title"
+          value={state.title}
+          onChange={handleChange}
           placeholder={title}
         />
       </div>
@@ -54,29 +88,36 @@ const Scene: React.FC<IProps> = (props: IProps) => {
         <div>
           <select
             className={styles.input}
-            value={newSetting}
-            onChange={(e: any) => setNewSetting(e.target.value)}
+            name="setting"
+            value={state.setting}
+            onChange={handleChange}
           >
-            <option value={Setting.Interior}>INT</option>
-            <option value={Setting.Exterior}>EXT</option>
+            <option value={ISetting.Interior}>INT</option>
+            <option value={ISetting.Exterior}>EXT</option>
           </select>
         </div>
         <div>
           <input
             className={styles.input}
-            value={newLocation}
-            onChange={(e: any) => setNewLocation(e.target.value)}
+            name="location"
+            value={state.location}
+            onChange={handleChange}
             placeholder={location}
           />
         </div>
         <div>
           <input
             className={styles.input}
-            value={newTime}
-            onChange={(e: any) => setNewTime(e.target.value)}
+            name="time"
+            value={state.time}
+            onChange={handleChange}
             placeholder={time}
           />
         </div>
+      </div>
+      <div className={styles.views}>
+        <div className={styles.toggle}>Narrative</div>
+        <div className={styles.toggle}>Script</div>
       </div>
       <div>
         <div className={styles.info}>
@@ -86,8 +127,8 @@ const Scene: React.FC<IProps> = (props: IProps) => {
           <textarea
             className={styles.textarea}
             name="setup"
-            value={newSetup}
-            onChange={(e: any) => setNewSetup(e.target.value)}
+            value={state.setup}
+            onChange={handleChange}
             placeholder={setup}
           />
         </div>
@@ -98,8 +139,8 @@ const Scene: React.FC<IProps> = (props: IProps) => {
           <textarea
             className={styles.textarea}
             name="action"
-            value={newAction}
-            onChange={(e: any) => setNewAction(e.target.value)}
+            value={state.action}
+            onChange={handleChange}
             placeholder={action}
           />
         </div>
@@ -110,11 +151,16 @@ const Scene: React.FC<IProps> = (props: IProps) => {
           <textarea
             className={styles.textarea}
             name="conclusion"
-            value={newConclusion}
-            onChange={(e: any) => setNewConclusion(e.target.value)}
+            value={state.conclusion}
+            onChange={handleChange}
             placeholder={conclusion}
           />
         </div>
+      </div>
+      <div className={styles.footer}>
+        <button className={styles.button} type="submit" onClick={onSubmit}>
+          Save Changes
+        </button>
       </div>
     </div>
   );

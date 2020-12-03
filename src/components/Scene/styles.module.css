@@ -18,6 +18,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: 2em;
+	gap: 16px;
 }
 
 .meta div {
@@ -31,6 +33,7 @@
 	text-align: center;
 	border: none;
 	outline: none;
+	margin-bottom: 0.4em;
 }
 
 .textarea, .title, .info {
@@ -54,6 +57,24 @@
 }
 
 .input {
+	height: 100%;
+	width: 100%;
+}
+
+.views {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 2em;
+	gap: 16px;
+}
+
+.footer {
+	width: 100%;
+	height: 2em;
+}
+
+.button {
 	height: 100%;
 	width: 100%;
 }

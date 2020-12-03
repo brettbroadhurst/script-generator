@@ -45,6 +45,16 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
       .catch((err: any) => console.error(err));
   }, []);
 
+  // Update the scene
+  function handleUpdateScene(id: number, data: any) {
+    fetch(`${API_ROOT}/documents/${docId}/scenes/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        ...data,
+      }),
+    });
+  }
+
   if (doc) {
     const { title, medium, format, genre } = doc;
     return (
@@ -63,7 +73,7 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
             <strong>Genre: </strong>
             {getGenre(genre)}
           </p>
-          <SceneList scenes={scenes} />
+          <SceneList scenes={scenes} handleSubmit={handleUpdateScene} />
         </div>
       </Layout>
     );

@@ -10,16 +10,17 @@ import styles from "./styles.module.css";
 
 type IProps = {
   scenes: IScene[];
+  handleSubmit(id: number, data: any): void;
 };
 
 // Scene list container
 const SceneList: React.FC<IProps> = (props: IProps) => {
-  const { scenes } = props;
+  const { scenes, handleSubmit } = props;
 
   return (
     <div className={styles.scenes}>
       {scenes.map((s: IScene) => (
-        <Scene key={s.id} {...s} />
+        <Scene key={s.id} handleSubmit={handleSubmit} {...s} />
       ))}
     </div>
   );
