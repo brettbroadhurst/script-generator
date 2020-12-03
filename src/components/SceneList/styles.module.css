@@ -1,0 +1,11 @@
+/* SceneList/index.tsx - Styles for Scene List
+ *
+ * Written by Brett Broadhurst <brettbroadhurst@gmail.com>
+ */
+
+.scenes {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+}

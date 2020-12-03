@@ -38,7 +38,7 @@ func main() {
 	r.GET("/documents", api.GetAllDocument)
 	r.POST("/documents", api.CreateDocument)
 	r.GET("/documents/:docId", api.GetOneDocument)
-	//r.GET("/documents/:docId/scenes", api.GetAllScene)
+	r.GET("/documents/:docId/scenes", api.GetAllScene)
 	r.POST("/documents/:docId/scenes", api.CreateScene)
 	r.Run()
 }

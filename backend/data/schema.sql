@@ -72,3 +72,40 @@ CREATE TRIGGER
 BEFORE UPDATE ON
 	sg.scene
 FOR EACH ROW EXECUTE PROCEDURE update_updated_on_column();
+
+INSERT INTO sg.document(title, medium, format, genre) VALUES ('Test Document', 1, 1, 1);
+INSERT INTO sg.scene(
+	doc_id,
+	title,
+	location,
+	time,
+	setup,
+	action,
+	conclusion
+) VALUES (
+	1,
+	'Test Scene',
+	'Location',
+	'Time',
+	'This is a setup',
+	'This is the action',
+	'This is the conclusion'
+);
+
+INSERT INTO sg.scene(
+	doc_id,
+	title,
+	location,
+	time,
+	setup,
+	action,
+	conclusion
+) VALUES (
+	1,
+	'Test Scene 2',
+	'Location 2',
+	'Time 2',
+	'This is a setup 2',
+	'This is the action 2',
+	'This is the conclusion 2'
+);

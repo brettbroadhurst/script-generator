@@ -6,7 +6,7 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styles from "./styles.module.css";
-import { Layout } from "../../components";
+import { Layout, SceneList } from "../../components";
 import { IDocument, IScene, IMedium, IFormat, IGenre } from "../../types";
 import { getMedium, getFormat, getGenre } from "../../util";
 import { API_ROOT } from "../../api";
@@ -63,6 +63,7 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
             <strong>Genre: </strong>
             {getGenre(genre)}
           </p>
+          <SceneList scenes={scenes} />
         </div>
       </Layout>
     );
