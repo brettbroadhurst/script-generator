@@ -21,8 +21,8 @@ CREATE TABLE sg.document (
 -- Scene represents a container for all scene data in a document/story.
 CREATE TABLE sg.scene (
 	scene_id   bigserial   not null,
-	doc_id     bigint      not null,
-	order_idx  bigint      not null AUTO_INCREMENT, 
+	doc_id     bigserial   not null,
+	order_idx  bigserial   not null, 
 	title      varchar(64) not null,
 	setting    smallint    not null,
 	location   varchar(64) not null,
@@ -73,7 +73,18 @@ BEFORE UPDATE ON
 	sg.scene
 FOR EACH ROW EXECUTE PROCEDURE update_updated_on_column();
 
-INSERT INTO sg.document(title, medium, format, genre) VALUES ('Test Document', 1, 1, 1);
+INSERT INTO sg.document(
+	title,
+	medium,
+	format,
+	genre
+) VALUES (
+	'Test Document',
+	1,
+	1,
+	1
+);
+
 INSERT INTO sg.scene(
 	doc_id,
 	title,

@@ -11,7 +11,9 @@ import styles from "./styles.module.css";
 type IProps = {
   scenes: IScene[];
   setScenes: any;
-  handleSubmit(id: number, data: any): void;
+  handleUpdate(id: number, data: any): void;
+  handleUpdatePosition(id: number, desired: number, current: number): void;
+  handleDelete(id: number): void;
 };
 
 type IProps2 = {
@@ -25,6 +27,7 @@ type IProps2 = {
 
 const Draggable: React.FC<IProps2> = (props: IProps2) => {
   const {
+    id,
     index,
     onDragStart,
     onDragOver,
@@ -40,6 +43,7 @@ const Draggable: React.FC<IProps2> = (props: IProps2) => {
       onDragLeave={onDragLeave}
       onDrop={onDrop}
       draggable="true"
+      data-id={id}
       data-position={index}
     >
       {children}
@@ -49,12 +53,18 @@ const Draggable: React.FC<IProps2> = (props: IProps2) => {
 
 // Scene list container
 const SceneList: React.FC<IProps> = (props: IProps) => {
-  const { scenes, setScenes, handleSubmit } = props;
+  const {
+    scenes,
+    setScenes,
+    handleUpdate,
+    handleUpdatePosition,
+    // handleDelete,
+  } = props;
 
   // Drag and drop state
   const [dnd, setDnd] = React.useState({
-    draggedFrom: null,
-    draggedTo: null,
+    draggedFrom: 0,
+    draggedTo: 0,
     isDragging: false,
     originalOrder: [],
     updatedOrder: [],
@@ -108,14 +118,16 @@ const SceneList: React.FC<IProps> = (props: IProps) => {
   }
 
   // Handler for onDrop event.
-  function handleDrop(): void {
+  function handleDrop(e: any): void {
+    const id = Number(e.currentTarget.dataset.position);
     setScenes(dnd.updatedOrder);
-    console.log(dnd.draggedFrom, dnd.draggedTo);
+    console.log(id, dnd.draggedFrom + 1, dnd.draggedTo + 1);
+    handleUpdatePosition(id, dnd.draggedFrom + 1, dnd.draggedTo + 1);
 
     setDnd({
       ...dnd,
-      draggedFrom: null,
-      draggedTo: null,
+      draggedFrom: 0,
+      draggedTo: 0,
       isDragging: false,
     });
   }
@@ -124,7 +136,7 @@ const SceneList: React.FC<IProps> = (props: IProps) => {
   function handleDragLeave(): void {
     setDnd({
       ...dnd,
-      draggedTo: null,
+      draggedTo: 0,
     });
   }
 
@@ -138,9 +150,10 @@ const SceneList: React.FC<IProps> = (props: IProps) => {
             onDragOver={handleDragOver}
             onDrop={handleDrop}
             onDragLeave={handleDragLeave}
+            id={s.id}
             index={i}
           >
-            <Scene handleSubmit={handleSubmit} {...s} />
+            <Scene handleSubmit={handleUpdate} {...s} />
           </Draggable>
         ))}
     </div>

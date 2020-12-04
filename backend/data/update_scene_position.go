@@ -26,29 +26,45 @@ func (db *Database) UpdateScenePosition(
 		up = false
 	}
 
+	query = `
+		UPDATE
+			sg.scene	
+		SET order_idx = $2 
+        WHERE
+		  scene_id = $1 
+	`
+
+	// Execute query
+	_, err = db.conn.Exec(
+		query,
+		id,
+		desired,
+	)
+
+	if err != nil {
+		db.logger.Printf("UpdateScenePosition(): %s\n", err)
+		return err
+	}
+
 	// Move: Update the items between the current position and the desired position, decreasing/increasing each item by 1 to make space for the new item
 	if up {
 		query = `
-		UPDATE sg.scene 
-		SET order_idx = (order_idx + 1)
-		WHERE order_idx >= $2
-		AND order_idx < $3
-		AND id = $1 
+		UPDATE sg.scene SET order_idx = (order_idx + 1)
+		WHERE order_idx >= $1
+		AND order_idx < $2
 		`
 	} else {
 		query = `
 		UPDATE sg.scene
 		SET order_idx = (order_idx - 1)
-		WHERE order_idx > $3 
-		AND order_idx <= $2 
-		AND id = $1 
+		WHERE order_idx > $2
+		AND order_idx <= $1
 		`
 	}
 
 	// Execute query
 	_, err = db.conn.Exec(
 		query,
-		id,
 		desired,
 		current,
 	)

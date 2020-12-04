@@ -21,18 +21,17 @@ func (db *Database) UpdateScene(
 
 	// Update query
 	query = `
-	UPDATE SET
-		title=$2,
+	UPDATE
+		sg.scene
+	SET title=$2,
 		setting=$3,
 		location=$4,
 		time=$5,
 		setup=$6,
 		action=$7,
 		conclusion=$8
-	FROM
-		sg.scene
 	WHERE
-		id = $1
+		scene_id = $1
 	`
 
 	// Execute query

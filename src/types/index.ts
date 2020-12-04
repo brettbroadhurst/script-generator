@@ -38,9 +38,9 @@ export interface IDocument {
 
 export interface IScene {
   id: number;
-  nextId: number;
   docId: number;
   title: string;
+  setting: number;
   location: string;
   time: string;
   setup: string;

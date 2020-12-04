@@ -35,7 +35,7 @@ func (service *APIService) GetOneDocument(ctx *gin.Context) {
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:
-			ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+			ctx.JSON(http.StatusNotFound, gin.H{"error": "Not found"})
 			return
 		default:
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

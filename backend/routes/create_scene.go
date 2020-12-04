@@ -15,6 +15,9 @@ type CreateSceneRequest struct {
 	// Title of the document
 	Title string `form:"title" json:"title" xml:"title" binding:"required"`
 
+	// Setting of the document
+	Setting int `form:"setting" json:"setting" xml:"setting" binding:"required"`
+
 	// Location setting
 	Location string `form:"location" json:"location" xml:"location" binding:"required"`
 
@@ -58,6 +61,7 @@ func (service *APIService) CreateScene(ctx *gin.Context) {
 	doc, err = service.db.CreateScene(
 		int64(id),
 		req.Title,
+		int16(req.Setting),
 		req.Location,
 		req.Time,
 		req.Setup,

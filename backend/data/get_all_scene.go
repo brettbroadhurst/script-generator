@@ -34,6 +34,8 @@ func (db *Database) GetAllSceneFromDocument(docId int64) ([]Scene, error) {
 		sg.scene
 	WHERE
 		doc_id = $1
+	ORDER BY
+		order_idx ASC
 	`
 
 	// Execute the query

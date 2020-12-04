@@ -14,7 +14,7 @@ const enum ISetting {
 }
 
 interface IProps extends IScene {
-  handleSubmit(id: number, data: any): void;
+  handleSubmit(id: number, data: any, orig: any): void;
 }
 
 interface IState {
@@ -70,7 +70,7 @@ const Scene: React.FC<IProps> = (props: IProps) => {
 
   function onSubmit(e: any): void {
     e.preventDefault();
-    handleSubmit(id, state);
+    handleSubmit(id, state, props);
   }
 
   return (

@@ -12,6 +12,7 @@ import (
 func (db *Database) CreateScene(
 	docId int64,
 	title string,
+	setting int16,
 	location string,
 	time string,
 	setup string,
@@ -30,6 +31,7 @@ func (db *Database) CreateScene(
 	INSERT INTO sg.scene (
 		doc_id,
 		title,
+		setting,
 		location,
 		time,
 		setup,
@@ -42,11 +44,13 @@ func (db *Database) CreateScene(
 		$4,
 		$5,
 		$6,
-		$7
+		$7,
+		$8
 	) RETURNING
 		scene_id,
 		doc_id,
 		title,
+		setting,
 		location,
 		time,
 		setup,
@@ -61,6 +65,7 @@ func (db *Database) CreateScene(
 		query,
 		docId,
 		title,
+		setting,
 		location,
 		time,
 		setup,
@@ -75,6 +80,7 @@ func (db *Database) CreateScene(
 		&scene.Id,
 		&scene.DocumentId,
 		&scene.Title,
+		&scene.Setting,
 		&scene.Location,
 		&scene.Time,
 		&scene.Setup,

@@ -45,6 +45,7 @@ func (service *APIService) UpdateScene(ctx *gin.Context) {
 	// Convert string to integer
 	id, err := strconv.Atoi(sceneId)
 	if err != nil {
+		service.logger.Printf("UpdateScene(): %s\n", err)
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -52,12 +53,14 @@ func (service *APIService) UpdateScene(ctx *gin.Context) {
 	// Check if the scene exists in the database
 	_, err = service.db.GetOneScene(int64(id))
 	if err != nil {
+		service.logger.Printf("UpdateScene(): %s\n", err)
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// Serialize the request
 	if err := ctx.ShouldBindJSON(&req); err != nil {
+		service.logger.Printf("UpdateScene(): %s\n", err)
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -74,6 +77,7 @@ func (service *APIService) UpdateScene(ctx *gin.Context) {
 		req.Conclusion,
 	)
 	if err != nil {
+		service.logger.Printf("UpdateScene(): %s\n", err)
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

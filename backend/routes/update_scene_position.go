@@ -12,7 +12,7 @@ import (
 // Request structure for updating a scene.
 type UpdateScenePositionRequest struct {
 	// Desired position of the scene
-	DesiredPosition int `form:"desired" json:"current" xml:"current" binding:"required"`
+	DesiredPosition int `form:"desired" json:"desired" xml:"desired" binding:"required"`
 	// Current position of the scene
 	CurrentPosition int `form:"current" json:"current" xml:"current" binding:"required"`
 }
@@ -29,6 +29,7 @@ func (service *APIService) UpdateScenePosition(ctx *gin.Context) {
 	// Convert string to integer
 	id, err := strconv.Atoi(sceneId)
 	if err != nil {
+		service.logger.Printf("UpdateScene(): %s\n", err)
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -36,12 +37,14 @@ func (service *APIService) UpdateScenePosition(ctx *gin.Context) {
 	// Check if the scene exists in the database
 	_, err = service.db.GetOneScene(int64(id))
 	if err != nil {
+		service.logger.Printf("UpdateScene(): %s\n", err)
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// Serialize the request
 	if err := ctx.ShouldBindJSON(&req); err != nil {
+		service.logger.Printf("UpdateScene(): %s\n", err)
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -53,6 +56,7 @@ func (service *APIService) UpdateScenePosition(ctx *gin.Context) {
 		int64(req.CurrentPosition),
 	)
 	if err != nil {
+		service.logger.Printf("UpdateScene(): %s\n", err)
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

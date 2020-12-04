@@ -33,7 +33,7 @@ func (db *Database) GetOneScene(id int64) (*Scene, error) {
 	FROM
 		sg.scene
 	WHERE
-		id = $1
+		scene_id = $1
 	`
 
 	// Execute the query
