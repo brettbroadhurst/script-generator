@@ -92,6 +92,14 @@ BEFORE UPDATE ON
 	sg.scene
 FOR EACH ROW EXECUTE PROCEDURE update_updated_on_column();
 
+-- Set updated time to now for every update on sg.actor.
+CREATE TRIGGER
+	actor_updated_at_modtime
+BEFORE UPDATE ON
+	sg.actor
+FOR EACH ROW EXECUTE PROCEDURE update_updated_on_column();
+
+-- Seed data
 INSERT INTO sg.document(
 	title,
 	medium,
