@@ -1,5 +1,5 @@
 // data/connect.go - Connect to the database
-// Written by Brett Broadhurst <brett@crevolute.com>
+// Written by Brett Broadhurst <brettbroadhurst@gmail.com>
 //
 
 package data
@@ -12,6 +12,7 @@ import (
 	os "os"
 )
 
+// Postgres environment variables.
 var (
 	HOST     = os.Getenv("POSTGRES_HOST")
 	PORT     = os.Getenv("POSTGRES_PORT")
@@ -35,6 +36,7 @@ func NewDBInstance(l *log.Logger) (*Database, error) {
 		err  error
 	)
 
+	// Connection string
 	str = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		HOST,
 		PORT,
@@ -43,6 +45,7 @@ func NewDBInstance(l *log.Logger) (*Database, error) {
 		DATABASE,
 	)
 
+	// Connect to the database
 	conn, err = sql.Open("postgres", str)
 	if err != nil {
 		return nil, err
@@ -54,7 +57,11 @@ func NewDBInstance(l *log.Logger) (*Database, error) {
 // Clean all data in the database.
 // Will only be used for testing.
 func (db *Database) Clean() {
-	_, _ = db.conn.Exec(`
+	_, err := db.conn.Exec(`
 		DELETE FROM sg.document;
 	`)
+
+	if err != nil {
+		panic(err)
+	}
 }

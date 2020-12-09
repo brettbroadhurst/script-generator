@@ -14,20 +14,20 @@ const DocumentsView: React.FC = () => {
   // Documents to display
   const [documents, setDocuments] = React.useState<IDocument[]>([]);
 
-  React.useEffect(() => {
-    // Get the documents from the API
-    function getDocs() {
-      fetch(`${API_ROOT}/documents`)
-        .then((res) => res.json())
-        .then(({ data }) => {
-          setDocuments(data);
-        })
-        .catch((err: any) => console.error(err));
-    }
+  // Get the documents from the API
+  function getDocs() {
+    fetch(`${API_ROOT}/documents`)
+      .then((res) => res.json())
+      .then(({ data }) => {
+        setDocuments(data);
+      })
+      .catch((err: any) => console.error(err));
+  }
 
+  React.useEffect(() => {
     getDocs();
 
-    let interval = setInterval(getDocs, 3000);
+    const interval: number = setInterval(getDocs, 3000);
 
     return function cleanup() {
       clearInterval(interval);

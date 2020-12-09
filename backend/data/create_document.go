@@ -18,6 +18,7 @@ func (db *Database) CreateDocument(title string, medium, format, genre int16) (*
 		err   error
 	)
 
+	// Insert query
 	query = `
 	INSERT INTO sg.document(
 		title,

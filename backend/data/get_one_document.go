@@ -18,6 +18,7 @@ func (db *Database) GetOneDocument(id int64) (*Document, error) {
 		err   error
 	)
 
+	// Select query
 	query = `
 	SELECT
 		doc_id,

@@ -34,7 +34,7 @@ CREATE TABLE sg.scene (
 	updated_on timestamp   not null default current_timestamp,
 
 	PRIMARY KEY (scene_id),
-	FOREIGN KEY (doc_id) REFERENCES sg.document(doc_id)
+	FOREIGN KEY (doc_id) REFERENCES sg.document(doc_id) ON DELETE CASCADE
 );
 
 -- Actor represents a character in a story.
