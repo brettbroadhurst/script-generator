@@ -40,6 +40,10 @@ func (db *Database) GetAllSceneFromDocument(docId int64) ([]Scene, error) {
 
 	// Execute the query
 	rows, err = db.conn.Query(query, docId)
+	if err != nil {
+		db.logger.Printf("GetAllSceneFromDocument() failed: %s\n", err)
+		return nil, err
+	}
 
 	// Allocate array of structs
 	scenes = make([]Scene, 0)
