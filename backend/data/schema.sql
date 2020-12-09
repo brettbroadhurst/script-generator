@@ -39,13 +39,32 @@ CREATE TABLE sg.scene (
 
 -- Actor represents a character in a story.
 CREATE TABLE sg.actor (
-	actor_id bigserial    not null,
-	doc_id   bigint       not null,
-	name     varchar(128) not null,
+	actor_id      bigserial    not null,
+	doc_id        bigint       not null,
+	name          varchar(128) not null,
+	avatar        varchar(64)  not null,
+	meta_role     smallint     not null,
+	priority      smallint     not null,
+	ext_strength  varchar(128) not null,
+	ext_weakness  varchar(128) not null,
+	int_virtue    varchar(128) not null,
+	int_flaw      varchar(128) not null,
+	prime_desire  varchar(128) not null,
+	starting_goal varchar(128) not null,
+	ultimate_goal varchar(128) not null,
+	denouement    varchar(128) not null,
+	created_on    timestamp    not null default current_timestamp,
+	updated_on    timestamp    not null default current_timestamp,
 
 	PRIMARY KEY (actor_id),
-	FOREIGN KEY (doc_id) REFERENCES sg.document(doc_id)
+	FOREIGN KEY (doc_id) REFERENCES sg.document(doc_id) ON DELETE CASCADE
 );
+
+--CREATE TABLE sg.actor_relationship ();
+--CREATE TABLE sg.actor_belief ();
+--CREATE TABLE sg.actor_value ();
+--CREATE TABLE sg.actor_routine ();
+--CREATE TABLE sg.actor_duty ();
 
 -- Change updated time when an update occurs on a table row.
 -- Should be executed in a trigger for all tables that need
