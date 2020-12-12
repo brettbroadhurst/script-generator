@@ -47,5 +47,9 @@ func main() {
 	r.PUT("/scenes/:sceneId/position", api.UpdateScenePosition)
 	r.DELETE("/scenes/:sceneId", api.DeleteScene)
 
+	// Actors
+	r.GET("/documents/:docId/actors", api.GetAllActor)
+	r.POST("/documents/:docId/actors", api.CreateActor)
+
 	r.Run()
 }
