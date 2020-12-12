@@ -27,7 +27,7 @@ const DocumentsView: React.FC = () => {
   React.useEffect(() => {
     getDocs();
 
-    const interval: number = setInterval(getDocs, 3000);
+    const interval = setInterval(getDocs, 3000);
 
     return function cleanup() {
       clearInterval(interval);

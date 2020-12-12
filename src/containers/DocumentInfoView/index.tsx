@@ -7,7 +7,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styles from "./styles.module.css";
 import { Layout, SceneList } from "../../components";
-import { IDocument, IScene, IMedium, IFormat, IGenre } from "../../types";
+import { IDocument, IScene } from "../../types";
 import { getMedium, getFormat, getGenre } from "../../util";
 import { API_ROOT } from "../../api";
 
@@ -47,6 +47,8 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
 
   // Create a new scene
   function handleCreateScene(e: any): void {
+    e.preventDefault();
+
     fetch(`${API_ROOT}/documents/${docId}/scenes`, {
       method: "POST",
       body: JSON.stringify({

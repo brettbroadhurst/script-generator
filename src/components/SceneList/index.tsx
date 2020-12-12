@@ -6,49 +6,15 @@
 import * as React from "react";
 import { IScene } from "../../types";
 import Scene from "../../components/Scene";
+import Draggable from "../../components/Draggable";
 import styles from "./styles.module.css";
 
 type IProps = {
   scenes: IScene[];
   setScenes: any;
-  handleUpdate(id: number, data: any): void;
+  handleUpdate(id: number, data: any, orig: any): void;
   handleUpdatePosition(id: number, desired: number, current: number): void;
   handleDelete(id: number): void;
-};
-
-type IProps2 = {
-  index: number;
-  children: React.ReactNode;
-  onDragStart(e: any): void;
-  onDragOver(e: any): void;
-  onDrop(): void;
-  onDragLeave(): void;
-};
-
-const Draggable: React.FC<IProps2> = (props: IProps2) => {
-  const {
-    id,
-    index,
-    onDragStart,
-    onDragOver,
-    onDrop,
-    onDragLeave,
-    children,
-  } = props;
-  return (
-    <div
-      className={styles.draggable}
-      onDragStart={onDragStart}
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}
-      onDrop={onDrop}
-      draggable="true"
-      data-id={id}
-      data-position={index}
-    >
-      {children}
-    </div>
-  );
 };
 
 // Scene list container
@@ -62,7 +28,7 @@ const SceneList: React.FC<IProps> = (props: IProps) => {
   } = props;
 
   // Drag and drop state
-  const [dnd, setDnd] = React.useState({
+  const [dnd, setDnd] = React.useState<any>({
     draggedFrom: 0,
     draggedTo: 0,
     isDragging: false,
