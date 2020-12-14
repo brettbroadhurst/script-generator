@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import styles from "./styles.module.css";
 import { Layout, OptionCard } from "../../components";
 import { IOption, IOptionCard, IMedium, IFormat, IGenre } from "../../types";
-import { API_ROOT } from "../../api";
+import { DocumentAPI } from "../../api";
 
 // Medium options
 const mediumOpts: IOptionCard[] = [
@@ -89,21 +89,8 @@ const CreationView: React.FC = () => {
 
   // Handler function for submitting the entered data.
   function handleSubmit(): void {
-    fetch(`${API_ROOT}/documents`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: "Test script",
-        medium,
-        format,
-        genre,
-      }),
-    })
-      .then((res) => res.json())
-      .then(({ data }) => console.log(data))
+    DocumentAPI.create({ title: "Test script", medium, format, genre })
+      .then((data: any): void => console.log(data))
       .catch((err) => console.error(err));
   }
 

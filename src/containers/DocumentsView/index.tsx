@@ -7,7 +7,7 @@ import * as React from "react";
 import { IDocument } from "../../types";
 import { Header, DocumentList } from "../../components";
 import { Layout } from "../../components";
-import { API_ROOT } from "../../api";
+import { DocumentAPI } from "../../api";
 
 // List all documents view
 const DocumentsView: React.FC = () => {
@@ -16,12 +16,10 @@ const DocumentsView: React.FC = () => {
 
   // Get the documents from the API
   function getDocs() {
-    fetch(`${API_ROOT}/documents`)
-      .then((res) => res.json())
-      .then(({ data }) => {
-        setDocuments(data);
-      })
-      .catch((err: any) => console.error(err));
+    // Get the documents from the API
+    DocumentAPI.getAll()
+      .then((d: IDocument[]): void => setDocuments(d))
+      .catch((err) => console.error(err));
   }
 
   React.useEffect(() => {
