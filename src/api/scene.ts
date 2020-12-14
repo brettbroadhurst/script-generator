@@ -31,7 +31,7 @@ export default class SceneAPI {
   }
 
   // Create a new scene.
-  public static async create(docId: number, actor: any) {
+  public static async create(docId: number, actor: any): Promise<IScene> {
     try {
       const res = await fetch(`${API_ROOT}/documents/${docId}/scenes`, {
         method: "POST",
@@ -92,7 +92,7 @@ export default class SceneAPI {
     sceneId: number,
     desired: number,
     current: number
-  ) {
+  ): Promise<any> {
     try {
       const res = await fetch(`${API_ROOT}/scenes/${sceneId}/position`, {
         method: "PUT",
@@ -102,7 +102,7 @@ export default class SceneAPI {
         }),
       });
 
-      const { data } = res.json();
+      const { data } = await res.json();
 
       return data;
     } catch (err) {
@@ -117,7 +117,7 @@ export default class SceneAPI {
         method: "DELETE",
       });
 
-      const { data } = res.json();
+      const { data } = await res.json();
 
       return data;
     } catch (err) {
