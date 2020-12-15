@@ -35,6 +35,12 @@ export interface IDocument {
   updatedOn: string;
 }
 
+export const enum ISetting {
+  None = 0,
+  Interior = 1,
+  Exterior = 2,
+}
+
 export interface IScene {
   id: number;
   docId: number;

@@ -9,6 +9,7 @@ import { IPriority, IRole } from "../../types";
 
 type IProps = {
   handleCreateActor(e: any): void;
+  handleToggleModal(e: any): void;
 };
 
 // Character data
@@ -29,7 +30,7 @@ interface IState {
 
 // Form component for creating actors
 const ActorForm: React.FC<IProps> = (props: IProps) => {
-  const { handleCreateActor } = props;
+  const { handleCreateActor, handleToggleModal } = props;
   const [state, setState] = React.useState<IState>({
     name: "",
     avatar: "",
@@ -58,24 +59,56 @@ const ActorForm: React.FC<IProps> = (props: IProps) => {
   }
 
   return (
-    <div className={styles.form}>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name: </label>
-        <input name="name" value={state.name} onChange={handleChange} />
+    <div className={styles.container}>
+      <div className={styles.modal} onClick={handleToggleModal}></div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h2 className={styles.header}>Create Actor</h2>
+        <label className={styles.label} htmlFor="name">
+          Name
+        </label>
+        <input
+          className={styles.input}
+          name="name"
+          value={state.name}
+          onChange={handleChange}
+          placeholder="John Doe"
+        />
 
-        <label htmlFor="avatar">Avatar: </label>
-        <input name="avatar" value={state.avatar} onChange={handleChange} />
+        <label className={styles.label} htmlFor="avatar">
+          Avatar
+        </label>
+        <input
+          className={styles.input}
+          name="avatar"
+          value={state.avatar}
+          onChange={handleChange}
+          placeholder="Image should be here"
+        />
 
-        <label htmlFor="role">Role: </label>
-        <select name="role" value={state.role} onChange={handleChange}>
+        <label className={styles.label} htmlFor="role">
+          Role
+        </label>
+        <select
+          className={styles.input}
+          name="role"
+          value={state.role}
+          onChange={handleChange}
+        >
           <option value={IRole.Protagonist}>Protagonist</option>
           <option value={IRole.Antagonist}>Antagonist</option>
           <option value={IRole.Ally}>Ally</option>
           <option value={IRole.Neutral}>Neutral</option>
         </select>
 
-        <label htmlFor="priority">Priority: </label>
-        <select name="priority" value={state.priority} onChange={handleChange}>
+        <label className={styles.label} htmlFor="priority">
+          Priority
+        </label>
+        <select
+          className={styles.input}
+          name="priority"
+          value={state.priority}
+          onChange={handleChange}
+        >
           <option value={IPriority.Major}>Major Character</option>
           <option value={IPriority.Minor}>Minor Character</option>
           <option value={IPriority.SingleServing}>
@@ -83,41 +116,97 @@ const ActorForm: React.FC<IProps> = (props: IProps) => {
           </option>
         </select>
 
-        <label htmlFor="strength">External Strength: </label>
-        <input name="strength" value={state.strength} onChange={handleChange} />
-
-        <label htmlFor="weakness">External Weakness: </label>
-        <input name="weakness" value={state.weakness} onChange={handleChange} />
-
-        <label htmlFor="virtue">Internal Virtue: </label>
-        <input name="virtue" value={state.virtue} onChange={handleChange} />
-
-        <label htmlFor="flaw">Internal Flaw: </label>
-        <input name="flaw" value={state.flaw} onChange={handleChange} />
-
-        <label htmlFor="desire">Primary Desire: </label>
-        <input name="desire" value={state.desire} onChange={handleChange} />
-
-        <label htmlFor="startingGoal">Starting Goal: </label>
+        <label className={styles.label} htmlFor="strength">
+          External Strength
+        </label>
         <input
+          className={styles.input}
+          name="strength"
+          value={state.strength}
+          onChange={handleChange}
+          placeholder="External strength to the character"
+        />
+
+        <label className={styles.label} htmlFor="weakness">
+          External Weakness
+        </label>
+        <input
+          className={styles.input}
+          name="weakness"
+          value={state.weakness}
+          onChange={handleChange}
+          placeholder="External weakness to the character"
+        />
+
+        <label className={styles.label} htmlFor="virtue">
+          Internal Virtue
+        </label>
+        <input
+          className={styles.input}
+          name="virtue"
+          value={state.virtue}
+          onChange={handleChange}
+          placeholder="Internal virtue of the character"
+        />
+
+        <label className={styles.label} htmlFor="flaw">
+          Internal Flaw
+        </label>
+        <input
+          className={styles.input}
+          name="flaw"
+          value={state.flaw}
+          onChange={handleChange}
+          placeholder="Internal flaw of the character"
+        />
+
+        <label className={styles.label} htmlFor="desire">
+          Primary Desire
+        </label>
+        <input
+          className={styles.input}
+          name="desire"
+          value={state.desire}
+          onChange={handleChange}
+          placeholder="Character's primary desire"
+        />
+
+        <label className={styles.label} htmlFor="startingGoal">
+          Starting Goal
+        </label>
+        <input
+          className={styles.input}
           name="startingGoal"
           value={state.startingGoal}
           onChange={handleChange}
+          placeholder="Starting goal of the character"
         />
 
-        <label htmlFor="ultimateGoal">Ultimate Goal: </label>
+        <label className={styles.label} htmlFor="ultimateGoal">
+          Ultimate Goal
+        </label>
         <input
+          className={styles.input}
           name="ultimateGoal"
           value={state.ultimateGoal}
           onChange={handleChange}
+          placeholder="Ultimate goal of the character"
         />
 
-        <label htmlFor="denoument">Denoument: </label>
+        <label className={styles.label} htmlFor="denoument">
+          Denoument
+        </label>
         <input
+          className={styles.input}
           name="denoument"
           value={state.denoument}
           onChange={handleChange}
+          placeholder="The final state of the charater is..."
         />
+
+        <button className={styles.button} type="submit">
+          Create Actor
+        </button>
       </form>
     </div>
   );

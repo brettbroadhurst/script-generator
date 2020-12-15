@@ -6,7 +6,13 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styles from "./styles.module.css";
-import { Layout, SceneList, ActorList, ActorForm } from "../../components";
+import {
+  Layout,
+  SceneList,
+  SceneForm,
+  ActorList,
+  ActorForm,
+} from "../../components";
 import { IDocument, IScene, IActor } from "../../types";
 import { getMedium, getFormat, getGenre } from "../../util";
 import { ActorAPI, DocumentAPI, SceneAPI } from "../../api";
@@ -26,8 +32,12 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
 
   // Scenes in the document
   const [scenes, setScenes] = React.useState<IScene[]>([]);
+
   // Actors in the document
   const [actors, setActors] = React.useState<IActor[]>([]);
+
+  // Scene modal visibility
+  const [sceneModal, setSceneModal] = React.useState<boolean>(false);
 
   // Actor modal visibility
   const [actorModal, setActorModal] = React.useState<boolean>(false);
@@ -92,8 +102,15 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
     setActorModal((prev: boolean): boolean => !prev);
   }
 
+  // Toggle Modal visible for Scene creation
+  function toggleSceneModal(e: any): void {
+    e.preventDefault();
+    setSceneModal((prev: boolean): boolean => !prev);
+  }
+
   if (doc) {
     const { title, medium, format, genre } = doc;
+
     return (
       <Layout>
         <div className={styles.container}>
@@ -111,17 +128,24 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
             {getGenre(genre)}
           </p>
           <div>
+            <h3 className={styles.heading}>Actors</h3>
             <ActorList actors={actors} />
             <button
               className={styles.button}
               type="button"
               onClick={toggleActorModal}
             >
-              Create New
+              +
             </button>
-            {actorModal && <ActorForm handleCreateActor={handleCreateActor} />}
+            {actorModal && (
+              <ActorForm
+                handleCreateActor={handleCreateActor}
+                handleToggleModal={toggleActorModal}
+              />
+            )}
           </div>
           <div>
+            <h3 className={styles.heading}>Scenes</h3>
             <SceneList
               scenes={scenes}
               setScenes={setScenes}
@@ -132,10 +156,17 @@ const DocumentInfoView: React.FC<IProps> = (props: IProps) => {
             <button
               className={styles.button}
               type="submit"
-              onClick={handleCreateScene}
+              onClick={toggleSceneModal}
             >
-              Create New
+              +
             </button>
+            {sceneModal && (
+              <SceneForm
+                docId={docId}
+                handleCreateScene={handleCreateScene}
+                handleToggleModal={toggleSceneModal}
+              />
+            )}
           </div>
         </div>
       </Layout>

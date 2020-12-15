@@ -4,14 +4,8 @@
 //
 
 import * as React from "react";
-import { IScene } from "../../types";
+import { IScene, ISetting } from "../../types";
 import styles from "./styles.module.css";
-
-const enum ISetting {
-  None = 0,
-  Interior = 1,
-  Exterior = 2,
-}
 
 interface IProps extends IScene {
   handleSubmit(id: number, data: any, orig: any): void;

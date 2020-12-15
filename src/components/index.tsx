@@ -8,8 +8,9 @@ import ActorForm from "./ActorForm";
 import ActorList from "./ActorList";
 import DocumentList from "./DocumentList";
 import Document from "./Document";
-import SceneList from "./SceneList";
 import Scene from "./Scene";
+import SceneForm from "./SceneForm";
+import SceneList from "./SceneList";
 import Header from "./Header";
 import Layout from "./Layout";
 import OptionCard from "./OptionCard";
@@ -21,6 +22,7 @@ export {
   Document,
   DocumentList,
   Scene,
+  SceneForm,
   SceneList,
   Header,
   Layout,

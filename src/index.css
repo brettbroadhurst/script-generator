@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'); 
+
 html,
 body,
 div,
@@ -125,8 +127,10 @@ table {
 
 html, body, body #root {
 	position: relative;
+	font-family: "Inter", sans-serif;
 	height: 100%;
 	width: 100%;
+	color: #202124;
 }
 
 *,
@@ -134,3 +138,4 @@ html, body, body #root {
 *::after { 
   box-sizing: border-box;
 }
+

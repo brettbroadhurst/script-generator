@@ -4,6 +4,7 @@
 //
 
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { IDocument } from "../../types";
 import Document from "../../components/Document";
 import styles from "./styles.module.css";
@@ -18,6 +19,10 @@ const DocumentList: React.FC<IProps> = (props: IProps) => {
 
   return (
     <div className={styles.documents}>
+      <Link className={styles.button} to="/new">
+        <p>+</p>
+      </Link>
+
       {documents.map((d: IDocument) => (
         <Document key={d.id} {...d} />
       ))}

@@ -5,17 +5,40 @@
 
 .container {
 	padding: 1em;
+	max-width: 800px;
+	margin: auto;
 }
 
 .container h1 {
 	font-size: 3rem;
+	font-weight: 800;
 	margin: 1em 0px;
 }
 
 .container strong {
-	font-weight: 600;
+	font-weight: 800;
 }
 
 .container p {
+	font-weight: 500;
 	font-size: 1.4rem;
+	margin-bottom: 0.4em;
+}
+
+.heading {
+	font-size: 2rem;
+	font-weight: 700;
+	padding: 1em 0;
+}
+
+.button {
+	height: 48px;
+	width: 48px;
+	font-size: 2rem;
+	font-weight: 700;
+	border: 3px solid #202124;
+}
+
+.button:hover {
+	cursor: pointer;
 }
